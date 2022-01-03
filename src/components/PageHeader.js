@@ -1,21 +1,26 @@
 import React from "react";
-import { Typography, Divider } from "@mui/material";
+
+import { Typography, Divider, Box } from "@mui/material";
 
 function PageHeader(props) {
+  // var Parameter = useParams();
   return (
     <>
-      <Typography
-        sx={{
-          fontSize: "1.5rem",
-        }}
-      >
-        <strong>{props.title}</strong>
-      </Typography>
-      <Divider sx={{ backgroundColor: "white", mt: 3 }} />
-      <Typography sx={{ p: 2 }}>
+      <Box sx={{ m: 3 }}>
+        <Typography
+          sx={{
+            fontSize: "1.5rem",
+          }}
+        >
+          <strong>{props.title}</strong> <br />
+          {/* <p style={{ fontSize: "17px" }}>{props.Parameter}</p> */}
+        </Typography>
+        <Divider sx={{ backgroundColor: "white", mx: 7, my: 3 }} />
+      </Box>
+      {/* <Typography sx={{ p: 2 }}>
         {props.title} <br /> A fast and extendable data table and data grid for
         React, made by Material-UI. Official docs
-      </Typography>
+      </Typography> */}
     </>
   );
 }

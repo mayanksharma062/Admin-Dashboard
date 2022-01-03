@@ -1,6 +1,8 @@
 import React from "react";
-import DataGridMaterialUI from "../pages/DataGridMaterialUI";
+import { Toolbar } from "@mui/material";
+import DataGridMaterialUI from "../components/DataGridMaterialUI";
 import Home from "../components/Home";
+import Profile from "../components/Profile";
 import { Routes, Route } from "react-router-dom";
 
 function SaareRoutes() {
@@ -11,10 +13,13 @@ function SaareRoutes() {
         height: "100vh",
       }}
     >
+      <Toolbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dataGrid" element={<DataGridMaterialUI />} />
+        <Route path="pages/profile" element={<Profile />} />
       </Routes>
+      <Toolbar />
     </div>
   );
 }

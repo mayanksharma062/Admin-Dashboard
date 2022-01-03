@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Divider, Toolbar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import PageHeader from "../components/PageHeader";
+import PageHeader from "./PageHeader";
 
 const columns = [
   {
@@ -70,8 +70,6 @@ export default function DataGridMaterialUI() {
 
   return (
     <>
-      {console.log("Mayank")}
-      <Toolbar />
       <div style={{ margin: "20px" }}>
         {/* <Typography
           sx={{
@@ -81,12 +79,13 @@ export default function DataGridMaterialUI() {
           <strong>Data Grid</strong>
         </Typography>
         <Divider sx={{ backgroundColor: "white", mt: 3 }} /> */}
+        <PageHeader title="Data Grid" />
+
         <div style={{ height: 380 }}>
-          {/* <Typography sx={{ p: 2 }}>
+          <Typography sx={{ p: 2 }}>
             Data Grid <br /> A fast and extendable data table and data grid for
             React, made by Material-UI. Official docs
-          </Typography> */}
-          <PageHeader title="Data Grid" />
+          </Typography>
           <DataGrid
             rows={rows}
             columns={columns}

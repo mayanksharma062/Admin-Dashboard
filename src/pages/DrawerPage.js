@@ -30,7 +30,8 @@ import { Avatar } from "@mui/material";
 import SaareRoutes from "../routes/SaareRoutes";
 
 import { Link, BrowserRouter as Router } from "react-router-dom";
-import DataGridMaterialUI from "./DataGridMaterialUI";
+import DataGridMaterialUI from "../components/DataGridMaterialUI";
+// import DataGridMaterialUI from "./DataGridMaterialUI";
 
 // import MenuItem from "@mui/material/MenuItem";
 // import FormControl from "@mui/material/FormControl";
@@ -233,7 +234,7 @@ function DrawerPage(props) {
           // { title: "Invoices", to: "/invoices" },
           // { title: "Tasks", to: "/tasks" },
           // { title: "Calender", to: "/calender" },
-          { title: "Auth", to: "/auth" },
+          // { title: "Auth", to: "/auth" },
           // { title: "Design Patterns", to: "/designPatters" },
         ].map((text, index) => {
           if (index === 0) {
@@ -276,9 +277,9 @@ function DrawerPage(props) {
                   </List>
                 </Collapse> */}
                 {SingleListItems(text, index, [
-                  { title: "Default", to: "/default" },
-                  { title: "Analytics", to: "/analytics" },
-                  { title: "Saas", to: "/saas" },
+                  { title: "Default", to: "dashboard/default" },
+                  { title: "Analytics", to: "dashboard/analytics" },
+                  { title: "Saas", to: "dashboard/saas" },
                 ])}
               </>
             );
@@ -328,15 +329,15 @@ function DrawerPage(props) {
                 </Collapse> */}
 
                 {SingleListItems(text, index, [
-                  { title: "Profile", to: "/profile" },
-                  { title: "Settings", to: "/settings" },
+                  { title: "Profile", to: "pages/profile" },
+                  { title: "Settings", to: "pages/settings" },
                   [
-                    { title: "Auth", to: "/auth" },
-                    { title: "Sign In", to: "/signIn" },
-                    { title: "Sign Up", to: "/signUp" },
-                    { title: "Reset Password", to: "/resetPassword" },
-                    { title: "404 Page", to: "/404Page" },
-                    { title: "500 Page", to: "/500Page" },
+                    { title: "Auth", to: "pages/auth" },
+                    { title: "Sign In", to: "pages/auth/signIn" },
+                    { title: "Sign Up", to: "pages/auth/signUp" },
+                    { title: "Reset Password", to: "pages/auth/resetPassword" },
+                    { title: "404 Page", to: "pages/auth/404Page" },
+                    { title: "500 Page", to: "pages/auth/500Page" },
                   ],
                   // { title: "Pricing", to: "/pricing" },
                   // { title: "Chat", to: "/chat" },
@@ -371,8 +372,8 @@ function DrawerPage(props) {
                   </List>
                 </Collapse> */}
                 {SingleListItems(text, index, [
-                  { title: "List", to: "/list" },
-                  { title: "Detail", to: "/detail" },
+                  { title: "List", to: `${text.title}/list` },
+                  { title: "Detail", to: `${text.title}/detail` },
                 ])}
               </>
             );
@@ -422,11 +423,14 @@ function DrawerPage(props) {
                 </Collapse> */}
 
                 {SingleListItems(text, index, [
-                  { title: "Sign In", to: "/signIn" },
-                  { title: "Sign Up", to: "/signUp" },
-                  { title: "Reset Password", to: "/resetPassword" },
-                  { title: "404 Page", to: "/404Page" },
-                  { title: "500 Page", to: "/500Page" },
+                  { title: "Sign In", to: `${text.title}/signIn` },
+                  { title: "Sign Up", to: `${text.title}/signUp` },
+                  {
+                    title: "Reset Password",
+                    to: `${text.title}/resetPassword`,
+                  },
+                  { title: "404 Page", to: `${text.title}/404Page` },
+                  { title: "500 Page", to: `${text.title}/500Page` },
                 ])}
               </>
             );
@@ -525,6 +529,7 @@ function DrawerPage(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
   return (
     <div>
       <Box sx={{ display: "fixed", fontSize: "13px" }}>
