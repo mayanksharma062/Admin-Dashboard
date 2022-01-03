@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Divider, Toolbar, Box, Typography } from "@mui/material";
+import { Toolbar, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import PageHeader from "./PageHeader";
 
@@ -60,9 +60,7 @@ const rows = [
 ];
 
 export default function DataGridMaterialUI() {
-  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rowsPages, setRowsPages] = React.useState([5, 10, 15]);
 
   const handleChangeRowsPerPage = (e) => {
     setRowsPerPage(e);
@@ -90,7 +88,7 @@ export default function DataGridMaterialUI() {
             rows={rows}
             columns={columns}
             pageSize={rowsPerPage}
-            rowsPerPageOptions={rowsPages}
+            rowsPerPageOptions={[5, 10, 15]}
             rowsPerPage={rowsPerPage}
             checkboxSelection
             onPageSizeChange={handleChangeRowsPerPage}

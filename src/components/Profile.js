@@ -108,6 +108,7 @@ const ProfileCard = () => {
                     backgroundColor: "#212121",
                     color: "inherit",
                     textAlign: "center",
+                    fontWeight: "bold",
                     outline: "2px dotted white",
                   }}
                   onBlur={(e) => (e.target.style.outline = "none")}
@@ -129,6 +130,7 @@ const ProfileCard = () => {
                     backgroundColor: "#212121",
                     color: "inherit",
                     textAlign: "center",
+                    fontWeight: "bold",
                   }}
                   onBlur={(e) => {
                     e.target.style.outline = "none";
@@ -162,7 +164,7 @@ const ProfileCard = () => {
                   //   e.target.readOnly = false;
                   //   e.target.style.outline = "2px dotted";
                   // }}
-                  onClick={(e) => setEditPost(true)}
+                  onClick={() => setEditPost(true)}
                   style={{
                     border: 0,
                     // marginLeft: 75,
@@ -183,7 +185,6 @@ const ProfileCard = () => {
                     e.target.readOnly = false;
                     e.target.style.outline = "2px dotted";
                   }}
-                  // onClick={(e) => (e.target.readOnly = true)}
                   style={{
                     border: 0,
                     // marginLeft: 75,
@@ -195,9 +196,7 @@ const ProfileCard = () => {
                     e.target.style.outline = "none";
                     e.target.readOnly = true;
                   }}
-                  // onFocus={(e) => (e.target.style.outline = "10px")}
                   readOnly
-                  // onDoubleClick={() => setEdit(true)}
                 />
               )}
             </Typography>
@@ -216,7 +215,7 @@ const ProfileCard = () => {
                       setOkayButton(false);
                     }}
                   >
-                    Edit Done
+                    Update
                   </Button>
                 </>
               ) : null}
