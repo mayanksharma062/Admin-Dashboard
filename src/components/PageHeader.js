@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Typography, Divider, Box } from "@mui/material";
 
@@ -24,5 +25,9 @@ function PageHeader(props) {
     </>
   );
 }
+
+PageHeader.propTypes = {
+  title: PropTypes.string,
+};
 
 export default PageHeader;
