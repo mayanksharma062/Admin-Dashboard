@@ -8,10 +8,11 @@ import person from "../lucy.jpg";
 // import AppBar from "@mui/material/AppBar";
 // import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
+import PropTypes from "prop-types";
 import { Button, ListSubheader } from "@mui/material";
 import { Typography } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import { ThemeProvider, createTheme, Grid } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -29,8 +30,8 @@ import { Paper } from "@mui/material";
 import { Avatar } from "@mui/material";
 import SaareRoutes from "../routes/SaareRoutes";
 
-import { Link, BrowserRouter as Router } from "react-router-dom";
-import DataGridMaterialUI from "../components/DataGridMaterialUI";
+import { Link } from "react-router-dom";
+// import DataGridMaterialUI from "../components/DataGridMaterialUI";
 // import DataGridMaterialUI from "./DataGridMaterialUI";
 
 // import MenuItem from "@mui/material/MenuItem";
@@ -137,7 +138,7 @@ function DrawerPage(props) {
       return (
         <>
           {/* <ListItemButton onClick={eval(`handleClickFor${mainText}`)}> */}
-          <ListItemButton onClick={HandleClick}>
+          <ListItemButton onClick={HandleClick} key={mainText.title}>
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
@@ -229,6 +230,7 @@ function DrawerPage(props) {
         {[
           { title: "Dashboard", to: "/dashboard" },
           { title: "Pages", to: "/pages" },
+          { title: "Forms ", to: "/form" },
           // { title: "Projects", to: "/projects" },
           // { title: "Orders", to: "/orders" },
           // { title: "Invoices", to: "/invoices" },
@@ -345,6 +347,13 @@ function DrawerPage(props) {
                 ])}
               </>
             );
+          } else if (index === 2) {
+            return SingleListItems(text, index, [
+              { title: "Form", to: "forms/form" },
+              { title: "First Step", to: "form/firstStep" },
+              { title: "Second Step", to: "form/secondStep" },
+              { title: "Third Step", to: "form/thirdStep" },
+            ]);
           } else if (index === 4) {
             return (
               <>
@@ -824,5 +833,9 @@ function DrawerPage(props) {
     </div>
   );
 }
+
+DrawerPage.propTypes = {
+  window: PropTypes.string,
+};
 
 export default DrawerPage;

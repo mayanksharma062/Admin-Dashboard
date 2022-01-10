@@ -11,11 +11,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import logo from "../logo.png";
 import { Avatar } from "@mui/material";
 import { Divider } from "@mui/material";
-import { Grid } from "@mui/material";
+// import { Grid } from "@mui/material";
 // import AccountCircle from "@mui/icons-material/AccountCircle";
 // import MailIcon from "@mui/icons-material/Mail";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -68,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar(props) {
+export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [language, setLanguage] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -323,6 +323,7 @@ export default function PrimarySearchAppBar(props) {
       </AppBar>
       {renderMobileMenu}
       {languageMenu}
+      {console.log(mobileLanguage)}
       {renderMenu}
     </Box>
   );
