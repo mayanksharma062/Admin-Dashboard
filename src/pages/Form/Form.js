@@ -1,7 +1,7 @@
 import React from "react";
-import FirstStep from "../pages/FirstStep";
-import SecondStep from "../pages/SecondStep";
-import ThirdStep from "../pages/ThirdStep";
+import FirstStep from "./FirstStep";
+import SecondStep from "./SecondStep";
+import ThirdStep from "./ThirdStep";
 import { Button, ListItemButton } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { useForm, FormProvider } from "react-hook-form";
@@ -49,7 +49,12 @@ function Form() {
   //     [event.target.name]: event.target.checked,
   //   });
   // };
-  const [defaultNames, setDefaultNames] = React.useState([]);
+  const [defaultNames, setDefaultNames] = React.useState(["car", "motorbike"]);
+  const [chips, setChips] = React.useState([
+    "Mayank Sharma",
+    "Yashi Jain",
+    "Vishal Jangid",
+  ]);
   const {
     register,
     handleSubmit,
@@ -58,6 +63,11 @@ function Form() {
     getValues,
   } = useForm({
     defaultValues: {
+      firstName: "Maya",
+      lastName: "Shar",
+      gender: "Male",
+      countryName: "India",
+      chip: chips,
       item_ids: defaultNames,
     },
   });
@@ -103,6 +113,7 @@ function Form() {
               data.item_ids?.map((val) =>
                 setDefaultNames((prev) => [...prev, val])
               );
+              data.chip?.map((val) => setChips((prev) => [...prev, val]));
               if (next <= 1) {
                 console.log(data);
                 const nextStep = next + 1;

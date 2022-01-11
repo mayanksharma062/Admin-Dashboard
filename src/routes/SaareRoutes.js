@@ -3,11 +3,11 @@ import { Toolbar } from "@mui/material";
 import DataGridMaterialUI from "../components/DataGridMaterialUI";
 import Home from "../components/Home";
 import Profile from "../components/Profile";
-import Form from "../components/Form";
+import Form from "../pages/Form/Form";
 import { Routes, Route } from "react-router-dom";
-import SecondStep from "../pages/SecondStep";
-import ThirdStep from "../pages/ThirdStep";
-import FirstStep from "../pages/FirstStep";
+import SecondStep from "../pages/Form/SecondStep";
+import ThirdStep from "../pages/Form/ThirdStep";
+import FirstStep from "../pages/Form/FirstStep";
 
 function SaareRoutes() {
   return (

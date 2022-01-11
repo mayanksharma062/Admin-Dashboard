@@ -2,6 +2,11 @@
 import React from "react";
 // import SecondStep from "../pages/SecondStep";
 import { useFormContext, Controller } from "react-hook-form";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import Stack from "@mui/material/Stack";
+import TimePicker from "@mui/lab/TimePicker";
 // import PropTypes from "prop-types";
 
 import {
@@ -100,6 +105,17 @@ function FirstStep(props) {
       : [...(ids ?? []), checkedId];
     return newIds;
   };
+  const [value, setValue] = React.useState(new Date());
+  const year = value.getFullYear();
+  const month = value.getMonth();
+  const day = value.getDate();
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  // Date Picker Add +- 1 year
+  // Time +-1
 
   // const lala = props.getValues()
   return (
@@ -132,6 +148,26 @@ function FirstStep(props) {
               // return <Link to="/forms/secondStep">SSSSSSSSSSSSS</Link>;
             })}
           > */}
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DesktopDatePicker
+                label="Date desktop"
+                inputFormat="MM/dd/yyyy"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+                maxDate={new Date(year + 1, month, day)}
+                minDate={new Date(year - 1, month, day)}
+                showTodayButton="true"
+              />
+              <TimePicker
+                label="Time"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+          </LocalizationProvider>
           <TextField
             id="input-with-icon-textfield"
             {...props.register("firstName", {
@@ -177,7 +213,7 @@ function FirstStep(props) {
                 <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup
                   aria-label="gender"
-                  defaultValue="none"
+                  defaultValue="Male"
                   // {...props.register("gender", {
                   //   required: "This is required again",
                   // })}
@@ -347,32 +383,32 @@ function FirstStep(props) {
           {/* <FormControl
           // {...props.register("transport", { required: "this is required" })}
           >
-            <FormLabel component="legend">Mode Of Transportation</FormLabel>
-            {checkBoxItems.map((item) => (
-              <Controller
-                control={props.control}
+          {checkBoxItems.map((item) => (
+            <Controller
+            control={props.control}
+            name={item.name}
+            key={item.id}
+            // rules={{ required: "true" }}
+            render={({ field: { onChange, value } }) => (
+              <FormControlLabel
+              control={
+                <Checkbox
+                checked={value}
+                onChange={(event, item) => {
+                  onChange(item);
+                  // console.log(event);
+                }}
                 name={item.name}
-                key={item.id}
-                // rules={{ required: "true" }}
-                render={({ field: { onChange, value } }) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={value}
-                        onChange={(event, item) => {
-                          onChange(item);
-                          // console.log(event);
-                        }}
-                        name={item.name}
-                      />
-                    }
-                    label={item.name}
-                  />
-                )}
+                />
+              }
+              label={item.name}
               />
-            ))}
-          </FormControl> */}
+              )}
+              />
+              ))}
+            </FormControl> */}
 
+          <FormLabel component="legend">Mode Of Transportation</FormLabel>
           <Controller
             name="item_ids"
             control={props.control}
@@ -409,7 +445,7 @@ function FirstStep(props) {
                   ? "This is a Required Field"
                   : null}
                 {props.errors.item_ids.type === "validate"
-                  ? "Put Only Two Values"
+                  ? "Put More Than Two Values"
                   : null}
               </p>
             </>
