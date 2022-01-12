@@ -13,6 +13,7 @@ import {
   // InputLabel,
   // ListItemButton,
 } from "@mui/material";
+import { teal } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -104,7 +105,12 @@ function ThirdStep(props) {
     // console.log(value);
     if (value.includes("None")) {
       setPersonName([]);
+      props.setError("chip", {
+        type: "noneValidation",
+        message: "This field is required",
+      });
     } else {
+      props.clearErrors("chip");
       setPersonName(
         // On autofill we get a stringified value.
         typeof value === "string" ? value.split(",") : value
@@ -113,7 +119,7 @@ function ThirdStep(props) {
   };
 
   return (
-    <div>
+    <>
       <Typography
         sx={{
           display: "flex",
@@ -123,21 +129,31 @@ function ThirdStep(props) {
       >
         Third Step (Health and Fitness Regime)
       </Typography>
-      <ThemeProvider theme={darkTheme}>
-        <Box
-          component="div"
-          sx={{
-            "& > :not(style)": { m: 1, width: "30ch" },
-            color: "inherit",
-            display: "flex",
-            flexDirection: "column",
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
-            {/* <Select
+      <div
+        style={{
+          margin: "10px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ThemeProvider theme={darkTheme}>
+          <Box
+            component="div"
+            sx={{
+              "& > :not(style)": { m: 1, width: "80ch" },
+              // justifyContent: "center",
+              color: "inherit",
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: teal[900],
+              p: 3,
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+              {/* <Select
               {...props.register("chip", {
                 required: "Kar Na Bhai",
               })}
@@ -149,114 +165,119 @@ function ThirdStep(props) {
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
                   ))}
-                </Box>
-              )}
-              MenuProps={MenuProps}
-            >
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select> */}
-            <Controller
-              control={props.control}
-              name="Chip"
-              // defaultValue={props.chip.map((val) => (
-              //   <Chip key={val} label={val} />
-              // ))}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  {...props.register("chip", {
-                    required: true,
-                    validate: (value) => value.length >= 3,
-                  })}
-                  labelId="demo-multiple-chip-label"
-                  id="demo-multiple-chip"
-                  multiple
-                  value={personName}
-                  // displayEmpty={true}
-                  // defaultValue={props.chip}
-                  onChange={handleChange}
-                  input={
-                    <OutlinedInput id="select-multiple-chip" label="Chip" />
-                  }
-                  renderValue={(selected) => (
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                      {/* {selected === [] ||
+                  </Box>
+                  )}
+                  MenuProps={MenuProps}
+                  >
+                  {names.map((name) => (
+                    <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, personName, theme)}
+                    >
+                    {name}
+                    </MenuItem>
+                    ))}
+                  </Select> */}
+              <Controller
+                control={props.control}
+                name="Chip"
+                // defaultValue={props.chip.map((val) => (
+                //   <Chip key={val} label={val} />
+                // ))}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    {...props.register("chip", {
+                      required: "This field is required",
+                      validate: (value) =>
+                        value.length >= 3 || "Put Atleast Three Values",
+                    })}
+                    labelId="demo-multiple-chip-label"
+                    id="demo-multiple-chip"
+                    multiple
+                    value={personName}
+                    // displayEmpty={true}
+                    // defaultValue={props.chip}
+                    onChange={handleChange}
+                    input={
+                      <OutlinedInput id="select-multiple-chip" label="Chip" />
+                    }
+                    renderValue={(selected) => (
+                      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                        {/* {selected === [] ||
                       selected === null ||
                       selected === undefined ||
                       selected === ""
-                        ? props.chip.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))
-                        : selected.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))} */}
-                      {selected.map((value) => (
+                      ? props.chip.map((value) => (
                         <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={MenuProps}
-                >
-                  {names.map((name) =>
-                    name === "None" ? (
-                      <MenuItem
-                        key={name}
-                        value={name}
-                        style={getStyles(name, personName, theme)}
-                      >
-                        {name}
-                      </MenuItem>
-                    ) : (
-                      <MenuItem
-                        key={name}
-                        value={name}
-                        style={getStyles(name, personName, theme)}
-                      >
-                        {name}
-                      </MenuItem>
-                    )
-                  )}
-                </Select>
-              )}
-            />
-          </FormControl>
-          {props.errors.chip ? (
-            <>
-              <p>
-                {props.errors.chip.type === "required"
-                  ? "This is a Required Field"
-                  : null}
-              </p>
-              <p>
-                {props.errors.chip.type === "validate"
-                  ? "Put Atleast Three Values"
-                  : null}
-              </p>
-            </>
-          ) : null}
+                        ))
+                        : selected.map((value) => (
+                          <Chip key={value} label={value} />
+                        ))} */}
+                        {selected.map((value) => (
+                          <Chip key={value} label={value} />
+                        ))}
+                      </Box>
+                    )}
+                    MenuProps={MenuProps}
+                  >
+                    {names.map((name) =>
+                      name === "None" ? (
+                        <MenuItem
+                          key={name}
+                          value={name}
+                          style={getStyles(name, personName, theme)}
+                        >
+                          {name}
+                        </MenuItem>
+                      ) : (
+                        <MenuItem
+                          key={name}
+                          value={name}
+                          style={getStyles(name, personName, theme)}
+                        >
+                          {name}
+                        </MenuItem>
+                      )
+                    )}
+                  </Select>
+                )}
+              />
+            </FormControl>
+            {/* {props.errors.chip ? (
+              <>
+                <p>
+                  {props.errors.chip.type === "required"
+                    ? "This is a Required Field"
+                    : null}
+                </p>
+                <p>
+                  {props.errors.chip.type === "validate"
+                    ? "Put Atleast Three Values"
+                    : null}
+                </p>
+              </>
+            ) : null} */}
+            <p style={{ color: "red", margin: 0, padding: 0 }}>
+              {props.errors.chip?.message}
+            </p>
 
-          {/* <ListItemButton
+            {/* <ListItemButton
             component={Link}
             to="/forms/secondStep"
             sx={{ fontSize: "13px", backgroundColor: blue[500] }}
             key="Next Step"
-          >
+            >
             Next Step
           </ListItemButton> */}
-        </Box>
-      </ThemeProvider>
-    </div>
+          </Box>
+        </ThemeProvider>
+      </div>
+    </>
   );
 }
 

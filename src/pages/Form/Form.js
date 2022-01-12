@@ -5,6 +5,7 @@ import ThirdStep from "./ThirdStep";
 import { Button, ListItemButton } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { useForm, FormProvider } from "react-hook-form";
+// import { teal } from "@mui/material/colors";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
 
@@ -49,12 +50,8 @@ function Form() {
   //     [event.target.name]: event.target.checked,
   //   });
   // };
-  const [defaultNames, setDefaultNames] = React.useState(["car", "motorbike"]);
-  const [chips, setChips] = React.useState([
-    "Mayank Sharma",
-    "Yashi Jain",
-    "Vishal Jangid",
-  ]);
+  const [defaultNames, setDefaultNames] = React.useState(["car", "bicycle"]);
+  // const [chips, setChips] = React.useState([]);
   const {
     register,
     handleSubmit,
@@ -64,12 +61,13 @@ function Form() {
     clearErrors,
     getValues,
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       firstName: "Maya",
       lastName: "Shar",
-      countryName: "India",
+      // countryName: "India",
       gender: "Male",
-      chip: chips,
+      chip: [],
       item_ids: defaultNames,
       email: "abc@gmail.com",
     },
@@ -88,6 +86,8 @@ function Form() {
           defaultNames={defaultNames}
           setError={setError}
           clearErrors={clearErrors}
+          getValues={getValues}
+
           // handleChange={handleChange}
         />
       ),
@@ -107,7 +107,8 @@ function Form() {
           register={register}
           errors={errors}
           control={control}
-          chip={chips}
+          setError={setError}
+          clearErrors={clearErrors}
           getValues={getValues}
         />
       ),
@@ -120,10 +121,15 @@ function Form() {
         <FormProvider>
           <form
             onSubmit={handleSubmit((data) => {
-              data.item_ids?.map((val) =>
-                setDefaultNames((prev) => [...prev, val])
-              );
-              data.chip?.map((val) => setChips((prev) => [...prev, val]));
+              // console.log(data.item_ids);
+              setDefaultNames([]);
+              data.item_ids?data.item_ids.map((val) =>
+                {
+                  // console.log(defaultNames);
+                  return setDefaultNames((prev) => [...prev, val]);
+                }
+              ):null;
+              // data.chip?.map((val) => setChips((prev) => [...prev, val]));
               if (next <= 1) {
                 console.log(data);
                 const nextStep = next + 1;
@@ -138,7 +144,15 @@ function Form() {
               <ListItemButton
                 component={Button}
                 //   to="/forms/secondStep"
-                sx={{ fontSize: "13px", backgroundColor: blue[500], m: 1 }}
+                sx={{
+                  fontSize: "13px",
+                  backgroundColor: blue[500],
+                  ml: 1,
+                  mb: 1,
+                  display: "inline",
+                  justifyContent: "center",
+                  left: "310px",
+                }}
                 label="Next Step"
                 onClick={() => setNext((prev) => prev - 1)}
               >
@@ -154,6 +168,10 @@ function Form() {
                 backgroundColor: blue[500],
                 ml: 1,
                 mb: 1,
+                display: "inline",
+                justifyContent: "center",
+                left: "310px",
+                // backgroundColor: teal[900],
               }}
               label="Next Step"
               type="submit"

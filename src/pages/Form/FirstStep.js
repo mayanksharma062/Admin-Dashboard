@@ -28,7 +28,7 @@ import {
   // Button,
 } from "@mui/material";
 // import { Link } from "react-router-dom";
-// import { blue } from "@mui/material/colors";
+import { teal } from "@mui/material/colors";
 
 // function Lali() {
 //   console.log("Arey Raja.............");
@@ -109,6 +109,7 @@ function FirstStep(props) {
   const year = value.getFullYear();
   const month = value.getMonth();
   const day = value.getDate();
+  const hour = value.getHours();
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -119,8 +120,7 @@ function FirstStep(props) {
 
   // const lala = props.getValues()
   return (
-    <div style={{ margin: "10px" }}>
-      {console.log(props.errors)}
+    <>
       <Typography
         sx={{
           display: "flex",
@@ -130,147 +130,174 @@ function FirstStep(props) {
       >
         First Step (Personal Details)
       </Typography>
-      <ThemeProvider theme={darkTheme}>
-        <Box
-          component="div"
-          sx={{
-            "& > :not(style)": { m: 1, width: "30ch" },
-            color: "inherit",
-            display: "flex",
-            flexDirection: "column",
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          {/* <form
+      <div
+        style={{
+          margin: "10px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {/* {console.log(props.errors)} */}
+        <ThemeProvider theme={darkTheme}>
+          <Box
+            component="div"
+            sx={{
+              "& > :not(style)": { m: 1, width: "80ch" },
+              // justifyContent: "center",
+              color: "inherit",
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: teal[900],
+              p: 3,
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            {/* <form
             onSubmit={handleSubmit((data) => {
               console.log(data);
               // return <Link to="/forms/secondStep">SSSSSSSSSSSSS</Link>;
             })}
           > */}
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
-              <DesktopDatePicker
-                label="Date desktop"
-                inputFormat="MM/dd/yyyy"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-                maxDate={new Date(year + 3, month, day)}
-                minDate={new Date(year - 1, month, day)}
-                showTodayButton="true"
-              />
-              <TimePicker
-                label="Time"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </Stack>
-          </LocalizationProvider>
-          <TextField
-            id="input-with-icon-textfield"
-            {...props.register("firstName", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum Length is 4" },
-              maxLength: { value: 20, message: "Minimum Length is 20" },
-            })}
-            // refs={props.register}
-            label="First Name"
-            name="firstName"
-            variant="standard"
-            onChange={(e) => {
-              if (e.target.value.length < 4) {
-                props.setError("firstName", {
-                  type: "validate",
-                  message: "Enter More Than 4 Letters",
-                });
-              } else {
-                props.clearErrors("firstName");
-              }
-            }}
-            error={props.errors.firstName ? true : false}
-            helperText={props.errors.firstName?.message}
-          />
-          {/* <p>{props.errors.firstName?.message}</p> */}
-          <TextField
-            id="input-with-icon-textfield"
-            {...props.register("lastName", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum Length is 4" },
-              maxLength: { value: 20, message: "Minimum Length is 20" },
-            })}
-            // refs={props.register}
-            onChange={(e) => {
-              if (e.target.value.length < 4) {
-                props.setError("lastName", {
-                  type: "validate",
-                  message: "Enter More Than 4 Letters",
-                });
-              } else {
-                props.clearErrors("lastName");
-              }
-            }}
-            label="Last Name"
-            // sx={{ ml: 3 }}
-            variant="standard"
-            name="lastName"
-            error={props.errors.lastName ? true : false}
-            helperText={props.errors.lastName?.message}
-          />
-          {/* <p>{props.errors.lastName?.message}</p> */}
-          <TextField
-            {...props.register("email", {
-              required: "This is required field.",
-            })}
-            // refs={props.register}
-            id="input-with-icon-textfield"
-            label="Email"
-            name="email"
-            // type="email"
-            onChange={(e) => {
-              if (
-                e.target.value.includes(" ") ||
-                e.target.value.includes("@") === false
-              ) {
-                props.setError("email", {
-                  type: "validate",
-                  message: "Please Enter A Valid Email",
-                });
-              } else {
-                props.clearErrors("email");
-              }
-            }}
-            variant="standard"
-            sx={{ pb: 2 }}
-            error={props.errors.email ? true : false}
-            helperText={props.errors.email?.message}
-          />
-          {/* <p>{props.errors.email?.message}</p> */}
-          <Controller
-            control={props.control}
-            name="gender"
-            rules={{ required: "This is required field" }}
-            render={({ field }) => (
-              <FormControl component="fieldset" {...field}>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  aria-label="gender"
-                  defaultValue="Male"
-                  // {...props.register("gender", {
-                  //   required: "This is required again",
-                  // })}
-                  // refs={props.register}
-                  name="gender"
-                  label="gender"
-
-                  // sx={{
-                  //   display: "flex",
-                  //   flexDirection: "row",
-                  //   width: "calc(100vw-240px)",
-                  // }}
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack spacing={3}>
+                <DesktopDatePicker
+                  label="Date desktop"
+                  inputFormat="MM/dd/yyyy"
+                  value={value}
+                  onChange={handleChange}
+                  sx={{ m: 2 }}
+                  renderInput={(params) => <TextField {...params} />}
+                  maxDate={new Date(year + 3, month, day)}
+                  minDate={new Date(year - 1, month, day)}
+                  showTodayButton="true"
+                />
+                <TimePicker
+                  label="Time"
+                  value={value}
+                  sx={{ m: 2 }}
+                  onChange={handleChange}
+                  minTime={new Date(year, month, day, hour - 2)}
+                  maxTime={new Date(year, month, day, hour + 2)}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Stack>
+            </LocalizationProvider>
+            <TextField
+              id="input-with-icon-textfield"
+              {...props.register("firstName", {
+                required: "This is required",
+                minLength: { value: 4, message: "Minimum Length is 4" },
+                maxLength: { value: 20, message: "Minimum Length is 20" },
+              })}
+              // refs={props.register}
+              label="First Name"
+              name="firstName"
+              variant="standard"
+              onChange={(e) => {
+                if (e.target.value.length < 4) {
+                  props.setError("firstName", {
+                    type: "validate",
+                    message: "Enter More Than 4 Letters",
+                  });
+                } else {
+                  props.clearErrors("firstName");
+                }
+              }}
+              sx={{ m: 2 }}
+              error={props.errors.firstName ? true : false}
+              helperText={props.errors.firstName?.message}
+            />
+            {/* <p>{props.errors.firstName?.message}</p> */}
+            <TextField
+              id="input-with-icon-textfield"
+              {...props.register("lastName", {
+                required: "This is required",
+                minLength: { value: 4, message: "Minimum Length is 4" },
+                maxLength: { value: 20, message: "Minimum Length is 20" },
+              })}
+              sx={{ m: 2 }}
+              // refs={props.register}
+              onChange={(e) => {
+                if (e.target.value.length < 4) {
+                  props.setError("lastName", {
+                    type: "validate",
+                    message: "Enter More Than 4 Letters",
+                  });
+                } else {
+                  props.clearErrors("lastName");
+                }
+              }}
+              label="Last Name"
+              // sx={{ ml: 3 }}
+              variant="standard"
+              name="lastName"
+              error={props.errors.lastName ? true : false}
+              helperText={props.errors.lastName?.message}
+            />
+            {/* <p>{props.errors.lastName?.message}</p> */}
+            <TextField
+              {...props.register("email", {
+                required: "This is required field.",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "invalid email address",
+                },
+              })}
+              // sx={{ m: 2 }}
+              // refs={props.register}
+              id="input-with-icon-textfield"
+              label="Email"
+              name="email"
+              // type="email"
+              // onChange={(e) => {
+              //   if (
+              //     e.target.value.includes(" ") ||
+              //     e.target.value.includes("@") === false
+              //   ) {
+              //     props.setError("email", {
+              //       type: "validate",
+              //       message: "Please Enter A Valid Email",
+              //     });
+              //   } else {
+              //     props.clearErrors("email");
+              //   }
+              // }}
+              variant="standard"
+              sx={{ pb: 2, m: 2 }}
+              error={props.errors.email ? true : false}
+              helperText={props.errors.email?.message}
+            />
+            {/* <p>{props.errors.email?.message}</p> */}
+            <Controller
+              control={props.control}
+              name="gender"
+              rules={{ required: "This is required field" }}
+              render={({ field }) => (
+                <FormControl
+                  sx={{ m: 2, mt: 0 }}
+                  component="fieldset"
+                  {...field}
                 >
-                  {/* <FormControlLabel
+                  <FormLabel component="legend">Gender</FormLabel>
+                  <RadioGroup
+                    aria-label="gender"
+                    defaultValue="Male"
+                    // {...props.register("gender", {
+                    //   required: "This is required again",
+                    // })}
+                    // refs={props.register}
+                    name="gender"
+                    label="gender"
+                    // sx={{ m: 2 }}
+
+                    // sx={{
+                    //   display: "flex",
+                    //   flexDirection: "row",
+                    //   width: "calc(100vw-240px)",
+                    // }}
+                  >
+                    {/* <FormControlLabel
                     value="female"
                     control={<Radio />}
                     label="Female"
@@ -285,33 +312,32 @@ function FirstStep(props) {
                     control={<Radio />}
                     label="Other"
                   /> */}
-                  {gender.map((value) => (
-                    <FormControlLabel
-                      key={value}
-                      value={value}
-                      control={<Radio />}
-                      label={value}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl>
-            )}
-          />
-          <p style={{ color: "red", margin: 0, padding: 0 }}>
-            {props.errors.gender?.message}
-          </p>
-
-          <TextField
-            {...props.register("age")}
-            id="input-with-icon-textfield"
-            label="Age"
-            variant="standard"
-            name="age"
-            // refs={props.register}
-          />
-          <p>{props.errors.age?.message}</p>
-
-          {/* <FormControl
+                    {gender.map((value) => (
+                      <FormControlLabel
+                        key={value}
+                        value={value}
+                        control={<Radio />}
+                        label={value}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
+            <p style={{ color: "red", margin: 0, padding: 0 }}>
+              {props.errors.gender?.message}
+            </p>
+            <TextField
+              {...props.register("age")}
+              id="input-with-icon-textfield"
+              label="Age"
+              variant="standard"
+              name="age"
+              // refs={props.register}
+              sx={{ m: 2 }}
+            />
+            <p>{props.errors.age?.message}</p>
+            {/* <FormControl
             component="fieldset"
             variant="standard"
             {...props.register("modeOfTransportation")}
@@ -356,7 +382,7 @@ function FirstStep(props) {
             </FormGroup>
             <p>{props.errors.modeOfTransportation?.message}</p>
           </FormControl> */}
-          {/* <FormControl component="fieldset" variant="standard">
+            {/* <FormControl component="fieldset" variant="standard">
             <Controller
               name="checkbox"
               control={props.control}
@@ -364,8 +390,7 @@ function FirstStep(props) {
               render={({ field }) => <Checkbox {...field} />}
             />
           </FormControl> */}
-
-          {/* <Controller
+            {/* <Controller
             control={props.control}
             name="transportation"
             // rules={{ required: "true" }}
@@ -424,8 +449,7 @@ function FirstStep(props) {
               </FormGroup>
             )}
           /> */}
-
-          {/* <FormControl
+            {/* <FormControl
           // {...props.register("transport", { required: "this is required" })}
           >
           {checkBoxItems.map((item) => (
@@ -453,51 +477,57 @@ function FirstStep(props) {
               ))}
             </FormControl> */}
 
-          <FormLabel component="legend">Mode Of Transportation</FormLabel>
-          <Controller
-            name="item_ids"
-            control={props.control}
-            rules={{
-              required: "Kam Se Kam Try Kar",
-              validate: (value) => value.length >= 2,
-            }}
-            render={({ field }) =>
-              checkBoxItems.map((item, index) => (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      defaultChecked={
-                        props.defaultNames.includes(item.name) ? true : false
-                      }
-                      onChange={() => {
-                        console.log(props.defaultNames);
-                        return field.onChange(handleCheck(item.name));
-                      }}
-                    />
-                  }
-                  key={item.id}
-                  label={item.name}
-                />
-              ))
-            }
-            // label="car"
-          />
-          {/* <p>{props.errors.item_ids?.message}</p> */}
-          {props.errors.item_ids ? (
-            <>
-              <p>
-                {props.errors.item_ids.type === "required"
-                  ? "This is a Required Field"
-                  : null}
-                {props.errors.item_ids.type === "validate"
-                  ? "Put More Than Two Values"
-                  : null}
-              </p>
-            </>
-          ) : null}
-        </Box>
-      </ThemeProvider>
-    </div>
+            <FormLabel sx={{ ml: 2 }} component="legend">
+              Mode Of Transportation
+            </FormLabel>
+            <Controller
+              name="item_ids"
+              control={props.control}
+              rules={{
+                required: "Kam Se Kam Try Kar",
+                validate: (value) => value.length >= 2,
+              }}
+              value={props.defaultNames ? props.defaultNames : ""}
+              render={({ field }) =>
+                checkBoxItems.map((item, index) => (
+                  <FormControlLabel
+                    sx={{ ml: 2 }}
+                    control={
+                      <Checkbox
+                        onChange={() => {
+                          // console.log(props.defaultNames);
+                          console.log(item.name);
+                          return field.onChange(handleCheck(item.name));
+                        }}
+                        defaultChecked={
+                          props.defaultNames.includes(item.name) ? true : false
+                        }
+                      />
+                    }
+                    key={item.id}
+                    label={item.name}
+                  />
+                ))
+              }
+              // label="car"
+            />
+            {/* <p>{props.errors.item_ids?.message}</p> */}
+            {props.errors.item_ids ? (
+              <>
+                <p>
+                  {props.errors.item_ids.type === "required"
+                    ? "This is a Required Field"
+                    : null}
+                  {props.errors.item_ids.type === "validate"
+                    ? "Put More Than Two Values"
+                    : null}
+                </p>
+              </>
+            ) : null}
+          </Box>
+        </ThemeProvider>
+      </div>
+    </>
   );
 }
 
