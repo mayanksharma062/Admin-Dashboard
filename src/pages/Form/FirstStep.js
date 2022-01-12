@@ -119,7 +119,7 @@ function FirstStep(props) {
 
   // const lala = props.getValues()
   return (
-    <div>
+    <div style={{ margin: "10px" }}>
       {console.log(props.errors)}
       <Typography
         sx={{
@@ -156,7 +156,7 @@ function FirstStep(props) {
                 value={value}
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}
-                maxDate={new Date(year + 1, month, day)}
+                maxDate={new Date(year + 3, month, day)}
                 minDate={new Date(year - 1, month, day)}
                 showTodayButton="true"
               />
@@ -179,8 +179,20 @@ function FirstStep(props) {
             label="First Name"
             name="firstName"
             variant="standard"
+            onChange={(e) => {
+              if (e.target.value.length < 4) {
+                props.setError("firstName", {
+                  type: "validate",
+                  message: "Enter More Than 4 Letters",
+                });
+              } else {
+                props.clearErrors("firstName");
+              }
+            }}
+            error={props.errors.firstName ? true : false}
+            helperText={props.errors.firstName?.message}
           />
-          <p>{props.errors.firstName?.message}</p>
+          {/* <p>{props.errors.firstName?.message}</p> */}
           <TextField
             id="input-with-icon-textfield"
             {...props.register("lastName", {
@@ -189,21 +201,52 @@ function FirstStep(props) {
               maxLength: { value: 20, message: "Minimum Length is 20" },
             })}
             // refs={props.register}
+            onChange={(e) => {
+              if (e.target.value.length < 4) {
+                props.setError("lastName", {
+                  type: "validate",
+                  message: "Enter More Than 4 Letters",
+                });
+              } else {
+                props.clearErrors("lastName");
+              }
+            }}
             label="Last Name"
             // sx={{ ml: 3 }}
             variant="standard"
             name="lastName"
+            error={props.errors.lastName ? true : false}
+            helperText={props.errors.lastName?.message}
           />
-          <p>{props.errors.lastName?.message}</p>
+          {/* <p>{props.errors.lastName?.message}</p> */}
           <TextField
-            {...props.register("email")}
+            {...props.register("email", {
+              required: "This is required field.",
+            })}
             // refs={props.register}
             id="input-with-icon-textfield"
             label="Email"
             name="email"
+            // type="email"
+            onChange={(e) => {
+              if (
+                e.target.value.includes(" ") ||
+                e.target.value.includes("@") === false
+              ) {
+                props.setError("email", {
+                  type: "validate",
+                  message: "Please Enter A Valid Email",
+                });
+              } else {
+                props.clearErrors("email");
+              }
+            }}
             variant="standard"
             sx={{ pb: 2 }}
+            error={props.errors.email ? true : false}
+            helperText={props.errors.email?.message}
           />
+          {/* <p>{props.errors.email?.message}</p> */}
           <Controller
             control={props.control}
             name="gender"
@@ -254,7 +297,9 @@ function FirstStep(props) {
               </FormControl>
             )}
           />
-          <p>{props.errors.gender?.message}</p>
+          <p style={{ color: "red", margin: 0, padding: 0 }}>
+            {props.errors.gender?.message}
+          </p>
 
           <TextField
             {...props.register("age")}

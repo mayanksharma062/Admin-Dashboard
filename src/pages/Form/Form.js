@@ -60,15 +60,18 @@ function Form() {
     handleSubmit,
     formState: { errors },
     control,
+    setError,
+    clearErrors,
     getValues,
   } = useForm({
     defaultValues: {
       firstName: "Maya",
       lastName: "Shar",
-      gender: "Male",
       countryName: "India",
+      gender: "Male",
       chip: chips,
       item_ids: defaultNames,
+      email: "abc@gmail.com",
     },
   });
 
@@ -82,8 +85,9 @@ function Form() {
           register={register}
           errors={errors}
           control={control}
-          getValues={getValues}
           defaultNames={defaultNames}
+          setError={setError}
+          clearErrors={clearErrors}
           // handleChange={handleChange}
         />
       ),
@@ -99,7 +103,13 @@ function Form() {
       step: 3,
       title: "Health And Fitness Regime",
       content: (
-        <ThirdStep register={register} errors={errors} control={control} />
+        <ThirdStep
+          register={register}
+          errors={errors}
+          control={control}
+          chip={chips}
+          getValues={getValues}
+        />
       ),
     },
   ];
@@ -128,7 +138,7 @@ function Form() {
               <ListItemButton
                 component={Button}
                 //   to="/forms/secondStep"
-                sx={{ fontSize: "13px", backgroundColor: blue[500], mb: 3 }}
+                sx={{ fontSize: "13px", backgroundColor: blue[500], m: 1 }}
                 label="Next Step"
                 onClick={() => setNext((prev) => prev - 1)}
               >
@@ -139,7 +149,12 @@ function Form() {
             <ListItemButton
               component={Button}
               //   to="/forms/secondStep"
-              sx={{ fontSize: "13px", backgroundColor: blue[500] }}
+              sx={{
+                fontSize: "13px",
+                backgroundColor: blue[500],
+                ml: 1,
+                mb: 1,
+              }}
               label="Next Step"
               type="submit"
             >
