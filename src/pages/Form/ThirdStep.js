@@ -49,6 +49,7 @@ function getStyles(name, personName, theme) {
 }
 
 const names = [
+  "None",
   "Mayank Sharma",
   "Vishal Jangid",
   "Yashi Jain",
@@ -89,21 +90,28 @@ function ThirdStep(props) {
   });
 
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState([
+    "Mayank Sharma",
+    "Vishal Jangid",
+    "Yashi Jain",
+  ]);
 
   const handleChange = (event) => {
-    // console.log(field);
+    console.log();
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    // console.log(value);
+    if (value.includes("None")) {
+      setPersonName([]);
+    } else {
+      setPersonName(
+        // On autofill we get a stringified value.
+        typeof value === "string" ? value.split(",") : value
+      );
+    }
   };
 
-  // const [secondStep, setSecondStep] = useState(false);
-  // const [firstStep, setfirstStep] = useState(true);
   return (
     <div>
       <Typography
@@ -161,6 +169,9 @@ function ThirdStep(props) {
             <Controller
               control={props.control}
               name="Chip"
+              // defaultValue={props.chip.map((val) => (
+              //   <Chip key={val} label={val} />
+              // ))}
               render={({ field }) => (
                 <Select
                   {...field}
@@ -172,12 +183,24 @@ function ThirdStep(props) {
                   id="demo-multiple-chip"
                   multiple
                   value={personName}
+                  // displayEmpty={true}
+                  // defaultValue={props.chip}
                   onChange={handleChange}
                   input={
                     <OutlinedInput id="select-multiple-chip" label="Chip" />
                   }
                   renderValue={(selected) => (
                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {/* {selected === [] ||
+                      selected === null ||
+                      selected === undefined ||
+                      selected === ""
+                        ? props.chip.map((value) => (
+                            <Chip key={value} label={value} />
+                          ))
+                        : selected.map((value) => (
+                            <Chip key={value} label={value} />
+                          ))} */}
                       {selected.map((value) => (
                         <Chip key={value} label={value} />
                       ))}
@@ -185,15 +208,25 @@ function ThirdStep(props) {
                   )}
                   MenuProps={MenuProps}
                 >
-                  {names.map((name) => (
-                    <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
+                  {names.map((name) =>
+                    name === "None" ? (
+                      <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, personName, theme)}
+                      >
+                        {name}
+                      </MenuItem>
+                    ) : (
+                      <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, personName, theme)}
+                      >
+                        {name}
+                      </MenuItem>
+                    )
+                  )}
                 </Select>
               )}
             />
