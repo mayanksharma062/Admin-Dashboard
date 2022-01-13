@@ -480,6 +480,18 @@ function FirstStep(props) {
             <FormLabel sx={{ ml: 2 }} component="legend">
               Mode Of Transportation
             </FormLabel>
+            {props.errors.item_ids ? (
+              <>
+                <p style={{ color: "red", margin: 0, padding: 0 }}>
+                  {props.errors.item_ids.type === "required"
+                    ? "This is a Required Field"
+                    : null}
+                  {props.errors.item_ids.type === "validate"
+                    ? "Put More Than Two Values"
+                    : null}
+                </p>
+              </>
+            ) : null}
             <Controller
               name="item_ids"
               control={props.control}
@@ -512,18 +524,6 @@ function FirstStep(props) {
               // label="car"
             />
             {/* <p>{props.errors.item_ids?.message}</p> */}
-            {props.errors.item_ids ? (
-              <>
-                <p>
-                  {props.errors.item_ids.type === "required"
-                    ? "This is a Required Field"
-                    : null}
-                  {props.errors.item_ids.type === "validate"
-                    ? "Put More Than Two Values"
-                    : null}
-                </p>
-              </>
-            ) : null}
           </Box>
         </ThemeProvider>
       </div>

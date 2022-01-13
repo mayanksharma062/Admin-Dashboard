@@ -159,7 +159,9 @@ function SecondStep(props) {
                 </FormControl>
               )}
             />
-            <p>{props.errors.countryName?.message}</p>
+            <p style={{ color: "red", margin: 0, padding: 0 }}>
+              {props.errors.countryName?.message}
+            </p>
 
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">State</InputLabel>

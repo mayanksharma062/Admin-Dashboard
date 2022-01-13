@@ -103,21 +103,23 @@ function ThirdStep(props) {
       target: { value },
     } = event;
     // console.log(value);
-    if (value.includes("None")) {
+    if (value.includes("None") || value.length === 0) {
       setPersonName([]);
       props.setError("chip", {
         type: "noneValidation",
         message: "This field is required",
       });
-    }
-    // else if (value.length !== 3) {
-    //   // console.log("object");
-    //   setPersonName(
-    //     // On autofill we get a stringified value.
-    //     typeof value === "string" ? value.split(",") : value
-    //   );
-    // }
-    else {
+    } else if (value.length !== 3) {
+      // console.log("object");
+      props.setError("chip", {
+        type: "lessThanThree",
+        message: "Put Atleast Three Items",
+      });
+      setPersonName(
+        // On autofill we get a stringified value.
+        typeof value === "string" ? value.split(",") : value
+      );
+    } else {
       props.clearErrors("chip");
       setPersonName(
         // On autofill we get a stringified value.
