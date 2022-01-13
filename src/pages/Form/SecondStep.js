@@ -140,7 +140,10 @@ function SecondStep(props) {
               label="countryName"
               name="countryName"
               control={props.control}
-              rules={{ required: "This is required" }}
+              rules={{
+                required: "This is required",
+                validate: (value) => value !== null || "This Field is required",
+              }}
               render={({ field }) => (
                 <FormControl fullWidth {...field}>
                   <InputLabel id="demo-simple-select-label">Country</InputLabel>
@@ -152,6 +155,7 @@ function SecondStep(props) {
                     onChange={(e, data) => field.onChange(data.props.value)}
                     name="country"
                   >
+                    <MenuItem value={null}>None</MenuItem>
                     <MenuItem value="India">India</MenuItem>
                     <MenuItem value="USA">United States Of America</MenuItem>
                     <MenuItem value="UK">United Kingdom</MenuItem>
@@ -175,6 +179,7 @@ function SecondStep(props) {
                 onChange={handleStateChange}
                 name="state"
               >
+                <MenuItem value={null}>None</MenuItem>
                 <MenuItem value="Rajasthan">Rajasthan</MenuItem>
                 <MenuItem value="Gujarat">Gujarat</MenuItem>
                 <MenuItem value="Maharashtra">Maharashtra</MenuItem>
@@ -193,6 +198,7 @@ function SecondStep(props) {
                 onChange={handleCityChange}
                 name="city"
               >
+                <MenuItem value={null}>None</MenuItem>
                 <MenuItem value="Kota">Kota</MenuItem>
                 <MenuItem value="Jaipur">Jaipur</MenuItem>
                 <MenuItem value="Ahmedabad">Ahmedabad</MenuItem>
