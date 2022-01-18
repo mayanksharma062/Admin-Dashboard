@@ -82,7 +82,7 @@ export default function PrimarySearchAppBar() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(Boolean(event.currentTarget));
+    // console.log(Boolean(event.currentTarget));
   };
 
   const handleMobileMenuClose = () => {
@@ -95,7 +95,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleMobileMenuOpen = (event) => {
-    console.log("object");
+    // console.log("object");
     setMobileMoreAnchorEl(event.currentTarget);
   };
 

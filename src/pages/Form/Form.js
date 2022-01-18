@@ -51,6 +51,9 @@ function Form() {
   //   });
   // };
   const [defaultNames, setDefaultNames] = React.useState(["car", "bicycle"]);
+  const [country, setCountry] = React.useState("");
+  const [state, setState] = React.useState("");
+  const [city, setCity] = React.useState("");
   // const [chips, setChips] = React.useState([]);
   const {
     register,
@@ -66,6 +69,9 @@ function Form() {
       firstName: "Maya",
       lastName: "Shar",
       // countryName: "India",
+      city: city,
+      state: state,
+      countryName: country,
       gender: "Male",
       item_ids: defaultNames,
       email: "abc@gmail.com",
@@ -95,7 +101,14 @@ function Form() {
       step: 2,
       title: "Address",
       content: (
-        <SecondStep register={register} errors={errors} control={control} />
+        <SecondStep
+          register={register}
+          errors={errors}
+          control={control}
+          city={city}
+          state={state}
+          country={country}
+        />
       ),
     },
     {
@@ -122,12 +135,15 @@ function Form() {
             onSubmit={handleSubmit((data) => {
               // console.log(data.item_ids);
               setDefaultNames([]);
-              data.item_ids?data.item_ids.map((val) =>
-                {
-                  // console.log(defaultNames);
-                  return setDefaultNames((prev) => [...prev, val]);
-                }
-              ):null;
+              data.item_ids
+                ? data.item_ids.map((val) => {
+                    // console.log(defaultNames);
+                    return setDefaultNames((prev) => [...prev, val]);
+                  })
+                : null;
+              data.city ? setCity(data.city) : null;
+              data.state ? setState(data.state) : null;
+              data.countryName ? setCountry(data.countryName) : null;
               // data.chip?.map((val) => setChips((prev) => [...prev, val]));
               if (next <= 1) {
                 console.log(data);

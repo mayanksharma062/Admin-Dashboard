@@ -50,27 +50,6 @@ function SecondStep(props) {
   const countries = ["India", "USA", "UK"];
   const cities = ["Kota", "Jaipur", "Jodhpur"];
   const states = ["Rajasthan", "Ahmedabad", "Karnataka"];
-  // // eslint-disable-next-line no-unused-vars
-  // const [city, setCity] = React.useState("");
-
-  // const handleCityChange = (event) => {
-  //   setCity(event.target.value);
-  // };
-  // // eslint-disable-next-line no-unused-vars
-  // const [state, setState] = React.useState("");
-
-  // const handleStateChange = (event) => {
-  //   console.log(event.target.value);
-  //   setState(event.target.value);
-  // };
-  // // const [country, setCountry] = React.useState("");
-
-  // const handleCountryChange = (event) => {
-  //   console.log(country);
-  //   setCountry(event.target.value);
-  // };
-  // const [secondStep, setSecondStep] = useState(false);
-  // const [firstStep, setfirstStep] = useState(true);
   return (
     <>
       <Typography
@@ -153,6 +132,8 @@ function SecondStep(props) {
                   id="country-select-demo"
                   sx={{ width: 300 }}
                   options={countries}
+                  defaultValue={props.country}
+                  // isOptionEqualToValue={true}
                   autoHighlight
                   onChange={(e, data) => field.onChange(data)}
                   getOptionLabel={(option) => option}
@@ -184,6 +165,7 @@ function SecondStep(props) {
                   sx={{ width: 300 }}
                   options={states}
                   autoHighlight
+                  defaultValue={props.state}
                   // onChange={(e, data) => field.onChange(data)}
                   onChange={(e, data) => field.onChange(data)}
                   // value={state}
@@ -251,6 +233,7 @@ function SecondStep(props) {
                   id="country-select-demo"
                   sx={{ width: 300 }}
                   options={cities}
+                  defaultValue={props.city}
                   autoHighlight
                   // onChange={(e, data) => field.onChange(data)}
                   onChange={(e, data) => field.onChange(data)}
