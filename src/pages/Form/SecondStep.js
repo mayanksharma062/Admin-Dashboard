@@ -7,10 +7,11 @@ import {
   createTheme,
   //   InputLabel,
   //   Input,
-  FormControl,
-  MenuItem,
-  Select,
-  InputLabel,
+  Autocomplete,
+  // FormControl,
+  // MenuItem,
+  // Select,
+  // InputLabel,
   // FormControlLabel,
   // ListItemButton,
 } from "@mui/material";
@@ -46,20 +47,23 @@ function SecondStep(props) {
     },
   });
 
-  // const countries = ["India", "USA", "UK"];
+  const countries = ["India", "USA", "UK"];
+  const cities = ["Kota", "Jaipur", "Jodhpur"];
+  const states = ["Rajasthan", "Ahmedabad", "Karnataka"];
+  // // eslint-disable-next-line no-unused-vars
+  // const [city, setCity] = React.useState("");
 
-  const [city, setCity] = React.useState("");
+  // const handleCityChange = (event) => {
+  //   setCity(event.target.value);
+  // };
+  // // eslint-disable-next-line no-unused-vars
+  // const [state, setState] = React.useState("");
 
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
-  const [state, setState] = React.useState("");
-
-  const handleStateChange = (event) => {
-    console.log(event.target.value);
-    setState(event.target.value);
-  };
-  // const [country, setCountry] = React.useState("");
+  // const handleStateChange = (event) => {
+  //   console.log(event.target.value);
+  //   setState(event.target.value);
+  // };
+  // // const [country, setCountry] = React.useState("");
 
   // const handleCountryChange = (event) => {
   //   console.log(country);
@@ -142,51 +146,63 @@ function SecondStep(props) {
               control={props.control}
               rules={{
                 required: "This is required",
-                validate: (value) => value !== null || "This Field is required",
+                // validate: (value) => value !== null || "This Field is required",
               }}
               render={({ field }) => (
-                <FormControl fullWidth {...field}>
-                  <InputLabel id="demo-simple-select-label">Country</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={field.value}
-                    label="Country"
-                    onChange={(e, data) => field.onChange(data.props.value)}
-                    name="country"
-                  >
-                    <MenuItem value={null}>None</MenuItem>
-                    <MenuItem value="India">India</MenuItem>
-                    <MenuItem value="USA">United States Of America</MenuItem>
-                    <MenuItem value="UK">United Kingdom</MenuItem>
-                  </Select>
-                </FormControl>
+                <Autocomplete
+                  id="country-select-demo"
+                  sx={{ width: 300 }}
+                  options={countries}
+                  autoHighlight
+                  onChange={(e, data) => field.onChange(data)}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Choose a country"
+                      inputProps={{
+                        ...params.inputProps,
+                      }}
+                      error={props.errors.countryName ? true : false}
+                      helperText={props.errors.countryName?.message}
+                    />
+                  )}
+                />
               )}
             />
-            <p style={{ color: "red", margin: 0, padding: 0 }}>
+            {/* <p style={{ color: "red", margin: 0, padding: 0 }}>
               {props.errors.countryName?.message}
-            </p>
+            </p> */}
 
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">State</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={state}
-                label="State"
-                {...props.register("state")}
-                // refs={props.register}
-                onChange={handleStateChange}
-                name="state"
-              >
-                <MenuItem value={null}>None</MenuItem>
-                <MenuItem value="Rajasthan">Rajasthan</MenuItem>
-                <MenuItem value="Gujarat">Gujarat</MenuItem>
-                <MenuItem value="Maharashtra">Maharashtra</MenuItem>
-              </Select>
-            </FormControl>
+            <Controller
+              label="state"
+              name="state"
+              control={props.control}
+              render={({ field }) => (
+                <Autocomplete
+                  id="country-select-demo"
+                  sx={{ width: 300 }}
+                  options={states}
+                  autoHighlight
+                  // onChange={(e, data) => field.onChange(data)}
+                  onChange={(e, data) => field.onChange(data)}
+                  // value={state}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Choose a State"
+                      inputProps={{
+                        ...params.inputProps,
+                      }}
+                      placeholder="States"
+                    />
+                  )}
+                />
+              )}
+            />
 
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">City</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -203,7 +219,57 @@ function SecondStep(props) {
                 <MenuItem value="Jaipur">Jaipur</MenuItem>
                 <MenuItem value="Ahmedabad">Ahmedabad</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
+            {/* <Autocomplete
+              id="country-select-demo"
+              sx={{ width: 300 }}
+              options={cities}
+              autoHighlight
+              {...props.register("city")}
+              // onChange={(e, data) => field.onChange(data)}
+              onChange={handleCityChange}
+              value={city}
+              getOptionLabel={(option) => option}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Choose a City"
+                  inputProps={{
+                    ...params.inputProps,
+                  }}
+                  placeholder="City"
+                />
+              )}
+            /> */}
+
+            <Controller
+              label="city"
+              name="city"
+              control={props.control}
+              render={({ field }) => (
+                <Autocomplete
+                  id="country-select-demo"
+                  sx={{ width: 300 }}
+                  options={cities}
+                  autoHighlight
+                  // onChange={(e, data) => field.onChange(data)}
+                  onChange={(e, data) => field.onChange(data)}
+                  // value={state}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Choose a City"
+                      inputProps={{
+                        ...params.inputProps,
+                      }}
+                      placeholder="Cities"
+                    />
+                  )}
+                />
+              )}
+            />
+
             {/* <ListItemButton
             component={Link}
             to="/forms/thirdStep"

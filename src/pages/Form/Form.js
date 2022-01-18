@@ -61,13 +61,12 @@ function Form() {
     clearErrors,
     getValues,
   } = useForm({
-    mode: "onChange",
+    mode: "all",
     defaultValues: {
       firstName: "Maya",
       lastName: "Shar",
       // countryName: "India",
       gender: "Male",
-      chip: [],
       item_ids: defaultNames,
       email: "abc@gmail.com",
     },
