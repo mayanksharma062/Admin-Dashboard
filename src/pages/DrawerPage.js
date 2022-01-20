@@ -231,6 +231,7 @@ function DrawerPage(props) {
           { title: "Dashboard", to: "/dashboard" },
           { title: "Pages", to: "/pages" },
           { title: "Forms ", to: "/form" },
+          { title: "List", to: "/List" },
           // { title: "Projects", to: "/projects" },
           // { title: "Orders", to: "/orders" },
           // { title: "Invoices", to: "/invoices" },
