@@ -105,11 +105,12 @@ function FirstStep(props) {
       : [...(ids ?? []), checkedId];
     return newIds;
   };
+  const newDate = new Date();
   const [value, setValue] = React.useState(new Date());
-  const year = value.getFullYear();
-  const month = value.getMonth();
-  const day = value.getDate();
-  const hour = value.getHours();
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth();
+  const day = newDate.getDate();
+  const hour = newDate.getHours();
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -168,7 +169,7 @@ function FirstStep(props) {
                   onChange={handleChange}
                   sx={{ m: 2 }}
                   renderInput={(params) => <TextField {...params} />}
-                  maxDate={new Date(year + 3, month, day)}
+                  maxDate={new Date(year + 1, month, day)}
                   minDate={new Date(year - 1, month, day)}
                   showTodayButton="true"
                 />

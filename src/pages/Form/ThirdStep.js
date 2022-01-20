@@ -51,7 +51,6 @@ import { Controller } from "react-hook-form";
 // }
 
 const names = [
-  "None",
   "Mayank Sharma",
   "Vishal Jangid",
   "Yashi Jain",

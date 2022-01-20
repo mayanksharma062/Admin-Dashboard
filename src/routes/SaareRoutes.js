@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import SecondStep from "../pages/Form/SecondStep";
 import ThirdStep from "../pages/Form/ThirdStep";
 import FirstStep from "../pages/Form/FirstStep";
+import List from "../pages/List";
 
 function SaareRoutes() {
   return (
@@ -27,6 +28,7 @@ function SaareRoutes() {
         <Route path="/form/firstStep" element={<FirstStep />} />
         <Route path="/form/secondStep" element={<SecondStep />} />
         <Route path="/form/thirdStep" element={<ThirdStep />} />
+        <Route path="/List" element={<List />} />
         {/* <Route path="/form/firstStep" element={<FirstStep />} />
         <Route path="/form/secondStep" element={<thirdStep />} />
         <Route path="/form/thirdStep" element={<thirdStep />} /> */}
