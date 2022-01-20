@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { FixedSizeList } from "react-window";
+import PageHeader from "../components/PageHeader";
 
 const data = new Array(50).fill().map((value, index) => ({
   id: index,
@@ -17,27 +18,7 @@ const data = new Array(50).fill().map((value, index) => ({
 }));
 
 const Grids = () => (
-  <Grid
-    container
-    spacing={3}
-    // sx={{
-    //   overflow: "hidden",
-    //   "& .MuiGrid": {
-    //     "&:hover": {
-    //       overflowY: "scroll",
-    //       overflowX: "hidden",
-    //     },
-    //     "::-webkit-scrollbar": {
-    //       width: "5px",
-    //       right: "2px",
-    //     },
-    //     "::-webkit-scrollbar-thumb": {
-    //       backgroundColor: "red",
-    //       color: "red",
-    //     },
-    //   },
-    // }}
-  >
+  <Grid container spacing={2}>
     {data.map((val) => {
       return (
         <Grid card md={3} xs={6} key={val.id}>
@@ -59,15 +40,19 @@ const Grids = () => (
             />
             <CardContent>
               <Typography gutterBottom variant="p" component="div">
-                {val.title}
+                {val.title.toUpperCase()}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {val.Authors}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              <Button size="small" sx={{ color: "blue" }}>
+                Share
+              </Button>
+              <Button size="small" sx={{ color: "blue" }}>
+                Learn More
+              </Button>
             </CardActions>
           </Card>
         </Grid>
@@ -83,50 +68,53 @@ function List() {
   //   image: faker.image.people(),
   // };
   return (
-    <div
-      style={{
-        marginLeft: "20px",
-        overflow: "hidden",
-        "&:hover": {
-          overflowY: "scroll",
-          overflowX: "hidden",
-        },
-        "::-webkit-scrollbar": {
-          width: "5px",
-          right: "2px",
-          backgroundColor: "red",
-          color: "red",
-        },
-        "::-webkit-scrollbar-thumb": {
-          backgroundColor: "red",
-          color: "white",
-        },
-      }}
-    >
-      <FixedSizeList
-        width={1295}
-        height={585}
-        itemCount={data.length}
-        itemSize={120}
-        // style={{
-        //   overflow: "hidden",
-        //   "&:hover": {
-        //     overflowY: "scroll",
-        //     overflowX: "hidden",
-        //   },
-        //   "::-webkit-scrollbar": {
-        //     width: "5px",
-        //     right: "2px",
-        //   },
-        //   "::-webkit-scrollbar-thumb": {
-        //     backgroundColor: "red",
-        //     color: "red",
-        //   },
-        // }}
+    <>
+      <PageHeader title="List Of Cards" />
+      <div
+        style={{
+          marginLeft: "20px",
+          overflow: "hidden",
+          "&:hover": {
+            overflowY: "scroll",
+            overflowX: "hidden",
+          },
+          "::-webkit-scrollbar": {
+            width: "5px",
+            right: "2px",
+            backgroundColor: "red",
+            color: "red",
+          },
+          "::-webkit-scrollbar-thumb": {
+            backgroundColor: "red",
+            color: "white",
+          },
+        }}
       >
-        {Grids}
-      </FixedSizeList>
-    </div>
+        <FixedSizeList
+          width={1295}
+          height={450}
+          itemCount={data.length}
+          itemSize={50}
+          // style={{
+          //   overflow: "hidden",
+          //   "&:hover": {
+          //     overflowY: "scroll",
+          //     overflowX: "hidden",
+          //   },
+          //   "::-webkit-scrollbar": {
+          //     width: "5px",
+          //     right: "2px",
+          //   },
+          //   "::-webkit-scrollbar-thumb": {
+          //     backgroundColor: "red",
+          //     color: "red",
+          //   },
+          // }}
+        >
+          {Grids}
+        </FixedSizeList>
+      </div>
+    </>
   );
 }
 
