@@ -101,24 +101,6 @@ function SecondStep(props) {
               variant="standard"
             />
 
-            {/* <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Country</InputLabel>
-            <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={country}
-            label="Country"
-            // refs={props.register}
-            {...props.register("country", { required: "This is required" })}
-            onChange={handleCountryChange}
-            name="country"
-            >
-            <MenuItem value="India">India</MenuItem>
-            <MenuItem value="USA">United States Of America</MenuItem>
-            <MenuItem value="United Kingdom">United Kingdom</MenuItem>
-            </Select>
-          </FormControl> */}
-
             <Controller
               label="countryName"
               name="countryName"
@@ -184,46 +166,6 @@ function SecondStep(props) {
               )}
             />
 
-            {/* <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">City</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={city}
-                label="City"
-                {...props.register("city")}
-                // refs={props.register}
-                onChange={handleCityChange}
-                name="city"
-              >
-                <MenuItem value={null}>None</MenuItem>
-                <MenuItem value="Kota">Kota</MenuItem>
-                <MenuItem value="Jaipur">Jaipur</MenuItem>
-                <MenuItem value="Ahmedabad">Ahmedabad</MenuItem>
-              </Select>
-            </FormControl> */}
-            {/* <Autocomplete
-              id="country-select-demo"
-              sx={{ width: 300 }}
-              options={cities}
-              autoHighlight
-              {...props.register("city")}
-              // onChange={(e, data) => field.onChange(data)}
-              onChange={handleCityChange}
-              value={city}
-              getOptionLabel={(option) => option}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Choose a City"
-                  inputProps={{
-                    ...params.inputProps,
-                  }}
-                  placeholder="City"
-                />
-              )}
-            /> */}
-
             <Controller
               label="city"
               name="city"
@@ -252,15 +194,6 @@ function SecondStep(props) {
                 />
               )}
             />
-
-            {/* <ListItemButton
-            component={Link}
-            to="/forms/thirdStep"
-            sx={{ fontSize: "13px", backgroundColor: blue[500] }}
-            key="Next Step"
-            >
-            Next Step
-          </ListItemButton> */}
           </Box>
         </ThemeProvider>
       </div>

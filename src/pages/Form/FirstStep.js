@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 // import SecondStep from "../pages/SecondStep";
 import { useFormContext, Controller } from "react-hook-form";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
@@ -111,11 +111,12 @@ function FirstStep(props) {
   const month = newDate.getMonth();
   const day = newDate.getDate();
   const hour = newDate.getHours();
+  const seconds = newDate.getSeconds();
+  const minutes = newDate.getMinutes();
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-
   // Date Picker Add +- 1 year
   // Time +-1
 
@@ -178,6 +179,10 @@ function FirstStep(props) {
                   value={value}
                   sx={{ m: 2 }}
                   onChange={handleChange}
+                  openTo="hours"
+                  views={["hours", "minutes", "seconds"]}
+                  inputFormat="HH:mm:ss"
+                  mask="__:__:__"
                   minTime={new Date(year, month, day, hour - 2)}
                   maxTime={new Date(year, month, day, hour + 2)}
                   renderInput={(params) => <TextField {...params} />}
@@ -250,20 +255,6 @@ function FirstStep(props) {
               id="input-with-icon-textfield"
               label="Email"
               name="email"
-              // type="email"
-              // onChange={(e) => {
-              //   if (
-              //     e.target.value.includes(" ") ||
-              //     e.target.value.includes("@") === false
-              //   ) {
-              //     props.setError("email", {
-              //       type: "validate",
-              //       message: "Please Enter A Valid Email",
-              //     });
-              //   } else {
-              //     props.clearErrors("email");
-              //   }
-              // }}
               variant="standard"
               sx={{ pb: 2, m: 2 }}
               error={props.errors.email ? true : false}
@@ -284,35 +275,9 @@ function FirstStep(props) {
                   <RadioGroup
                     aria-label="gender"
                     defaultValue="Male"
-                    // {...props.register("gender", {
-                    //   required: "This is required again",
-                    // })}
-                    // refs={props.register}
                     name="gender"
                     label="gender"
-                    // sx={{ m: 2 }}
-
-                    // sx={{
-                    //   display: "flex",
-                    //   flexDirection: "row",
-                    //   width: "calc(100vw-240px)",
-                    // }}
                   >
-                    {/* <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  /> */}
                     {gender.map((value) => (
                       <FormControlLabel
                         key={value}
@@ -338,146 +303,7 @@ function FirstStep(props) {
               sx={{ m: 2 }}
             />
             <p>{props.errors.age?.message}</p>
-            {/* <FormControl
-            component="fieldset"
-            variant="standard"
-            {...props.register("modeOfTransportation")}
-          >
-            <FormLabel component="legend">Mode Of Transportation</FormLabel>
-
-            <FormGroup
-              // {...props.register("modeOfTransportation", {
-              //   required: "Kuch Daaal",
-              //   min: { value: 2, message: "Arey Waah" },
-              // })}
-              refs={props.register}
-              name="modeOfTransportation"
-            >
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Car"
-                name="car"
-                {...props.register("car")}
-              />
-
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Motorbike"
-                name="Motorbike"
-                {...props.register("motorbike")}
-              />
-
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Bicycle"
-                name="Bicycle"
-                {...props.register("bicycle")}
-              />
-
-              <FormControlLabel
-                control={<Checkbox />}
-                {...props.register("boat")}
-                label="Boat"
-                name="Boat"
-              />
-            </FormGroup>
-            <p>{props.errors.modeOfTransportation?.message}</p>
-          </FormControl> */}
-            {/* <FormControl component="fieldset" variant="standard">
-            <Controller
-              name="checkbox"
-              control={props.control}
-              rules={{ required: true }}
-              render={({ field }) => <Checkbox {...field} />}
-            />
-          </FormControl> */}
-            {/* <Controller
-            control={props.control}
-            name="transportation"
-            // rules={{ required: "true" }}
-            render={({ field }) => (
-              // <div>wewewewe</div>
-              <FormGroup
-                // name="modeOfTransportation"
-                {...field}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={car}
-                      onChange={props.handleChange}
-                      name="car"
-                    />
-                  }
-                  label="Car"
-                  // {...props.register("car")}
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={motorbike}
-                      onChange={props.handleChange}
-                      name="motorbike"
-                    />
-                  }
-                  label="Motorbike"
-
-                  // {...props.register("motorbike")}
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={bicycle}
-                      onChange={props.handleChange}
-                      name="bicycle"
-                    />
-                  }
-                  label="Bicycle"
-
-                  // {...props.register("bicycle")}
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={boat}
-                      onChange={props.handleChange}
-                      name="boat"
-                    />
-                  }
-                  // {...props.register("boat")}
-                  label="Boat"
-                />
-              </FormGroup>
-            )}
-          /> */}
-            {/* <FormControl
-          // {...props.register("transport", { required: "this is required" })}
-          >
-          {checkBoxItems.map((item) => (
-            <Controller
-            control={props.control}
-            name={item.name}
-            key={item.id}
-            // rules={{ required: "true" }}
-            render={({ field: { onChange, value } }) => (
-              <FormControlLabel
-              control={
-                <Checkbox
-                checked={value}
-                onChange={(event, item) => {
-                  onChange(item);
-                  // console.log(event);
-                }}
-                name={item.name}
-                />
-              }
-              label={item.name}
-              />
-              )}
-              />
-              ))}
-            </FormControl> */}
-
+            
             <FormLabel sx={{ ml: 2 }} component="legend">
               Mode Of Transportation
             </FormLabel>
@@ -522,9 +348,7 @@ function FirstStep(props) {
                   />
                 ))
               }
-              // label="car"
             />
-            {/* <p>{props.errors.item_ids?.message}</p> */}
           </Box>
         </ThemeProvider>
       </div>
@@ -532,9 +356,5 @@ function FirstStep(props) {
   );
 }
 
-// FirstStep.propTypes = {
-//   register: PropTypes.object,
-//   errors: PropTypes.object,
-// };
 
 export default FirstStep;
